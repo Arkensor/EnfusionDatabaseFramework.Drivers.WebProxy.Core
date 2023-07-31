@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.HttpOverrides;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 
@@ -12,6 +13,16 @@ public static class WebApplicationExtensions
 
         app.UseWhen(context => context.Request.Path.StartsWithSegments(baseRoute), branch =>
         {
+            // Ip whitelist
+            branch.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
+
+            string whitelist = app.Configuration["IPWhitelist"]!;
+            if (!string.IsNullOrWhiteSpace(whitelist))
+                branch.UseMiddleware<IPWhitelist>(whitelist);
+
             // Content type fix
             branch.Use(async (context, next) =>
             {

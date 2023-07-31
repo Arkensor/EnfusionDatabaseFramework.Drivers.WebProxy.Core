@@ -6,8 +6,8 @@
     <Nullable>enable</Nullable>
     <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <FileVersion>0.9.0</FileVersion>
-    <Version>0.9.0</Version>
+    <FileVersion>1.0.0</FileVersion>
+    <Version>1.0.0</Version>
     <OutputType>Library</OutputType>
     <Title>$(AssemblyName)</Title>
     <Authors>Arkensor</Authors>
